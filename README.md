@@ -30,9 +30,6 @@ For Software:
 - No libraries used
 - Google Antigravity (agentic IDE), Git, GitHub, browser DevTools
 
-For Hardware:
-[None]
-
 ### Implementation
 For Software:
 No installation or dependencies required — this is a single self-contained HTML file with no build step, no package manager, and no external libraries.
@@ -72,32 +69,11 @@ It shows the certificate generated.
 
 Scene diagrams are here.
 
-For Hardware:Nothing much.
-
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-# Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
-
 ### Project Demo
 # Video
 [https://youtu.be/l232sl_noJY?si=yfKrlQJjwFcysed-]
 *Explain what the video demonstrates*
 
-# Additional Demos
-[Add any extra demo materials/links]
 
 ## Team Contributions
 [Sreehari P Ranjith:Research]
