@@ -56,17 +56,20 @@ Three findings generate with a staggered reveal: Reincarnation (species + realm)
 Results render onto a certificate, exportable as PNG or shareable directly.
 
 # Screenshots (Add at least 3)
-[![alt text](<4D8DB4A3-EF41-4A75-9F35-CF7E7574FBF4>-1.png)]
-It shows the cover page for our website.
+<img width="1920" height="1080" alt="{BD598AE7-398A-4069-B3FC-EDDC4EBA50D8}" src="https://github.com/user-attachments/assets/391d7979-6b14-4eaa-adb1-db35fc88c283" />
 
-[![alt text](<F5C6804B-60D4-4833-9396-05445CF07379>.png)]
+It shows the cover page for our website.
+<img width="1912" height="1077" alt="{4963989E-2187-49B3-96C9-C2567848CFC7}" src="https://github.com/user-attachments/assets/c295a17c-8fed-4ca6-8fec-0ba189244293" />
+
 It shows where u gonna type ur name  DOB.
 
-[![alt text](<86FA9FE6-9A1C-4F73-A357-0824E7879386>.png)]
+<img width="1918" height="1076" alt="{BA81CF66-31A5-4C50-B925-169A6762B61B}" src="https://github.com/user-attachments/assets/619e9eac-29f7-444b-b96d-e5fd1a1a3530" />
+
 It shows the certificate generated.
 
 # Diagrams
-![alt text](workflow-1.jpg)
+<img width="1028" height="1294" alt="workflow" src="https://github.com/user-attachments/assets/716871a3-675b-4104-87cb-04436e6e7830" />
+
 Scene diagrams are here.
 
 For Hardware:Nothing much.
