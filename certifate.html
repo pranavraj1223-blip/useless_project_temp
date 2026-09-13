@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CertiFate — Official Bureau of Cosmic Predestination</title>
+  <meta name="description" content="CertiFate: A joke destiny generator. Uncover your Reincarnation Animal, Geo-Destiny, and Financial Destiny.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Alex+Brush&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #070510;
+      --bg-card: rgba(22, 17, 44, 0.78);
+      --gold-primary: #d4af37;
+      --gold-bright: #ffd700;
+      --gold-light: #fef0b8;
+      --gold-border: rgba(212, 175, 55, 0.45);
+      --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+      --cyan-accent: #64ffda;
+      --emerald-accent: #4ade80;
+      --text-main: #f0edf6;
+      --text-muted: #a49fc0;
+      --text-dim: #716b92;
+      --font-serif: 'Cinzel', Georgia, serif;
+      --font-sans: 'Outfit', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --font-script: 'Alex Brush', cursive;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(138, 43, 226, 0.18) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(212, 175, 55, 0.12) 0%, transparent 50%),
+        radial-gradient(1px 1px at 40px 60px, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 160px 120px, #ffd700, transparent),
+        radial-gradient(1px 1px at 320px 220px, #64ffda, transparent);
+      background-size: 100% 100%, 100% 100%, 300px 300px, 450px 450px, 600px 600px;
+    }
+
+    .app-container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2.5rem 1.2rem 4rem;
+    }
+
+    .app-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .bureau-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 1.1rem;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--gold-border);
+      border-radius: 999px;
+      font-family: var(--font-serif);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      margin-bottom: 0.8rem;
+    }
+
+    .app-title {
+      font-family: var(--font-serif);
+      font-size: 3.4rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.3rem;
+    }
+
+    .title-white { color: #ffffff; text-shadow: 0 0 20px rgba(255,255,255,0.4); }
+    .title-gold {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .app-tagline {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .app-subtext {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* Generator Card */
+    .generator-card {
+      background: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      border-radius: 14px;
+      padding: 2.2rem 2rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(212, 175, 55, 0.15);
+      backdrop-filter: blur(16px);
+      margin-bottom: 2.8rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: rgba(10, 7, 24, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 8px;
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus {
+      border-color: var(--gold-bright);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .btn-process {
+      padding: 0.95rem 2.6rem;
+      background: linear-gradient(135deg, #ffd700 0%, #d4af37 50%, #aa771c 100%);
+      color: #0c0819;
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+      transition: all 0.25s ease;
+    }
+
+    .btn-process:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(212, 175, 55, 0.6);
+      background: linear-gradient(135deg, #fff199 0%, #ffd700 50%, #c59020 100%);
+    }
+
+    .btn-random {
+      padding: 0.95rem 1.5rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: var(--text-main);
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .btn-random:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+    }
+
+    /* Loading Overlay */
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 5, 16, 0.92);
+      backdrop-filter: blur(20px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .loading-box {
+      text-align: center;
+      max-width: 460px;
+      width: 100%;
+    }
+
+    .loading-spinner {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 1.5rem;
+      border: 3px solid rgba(212, 175, 55, 0.2);
+      border-top-color: var(--gold-bright);
+      border-right-color: var(--cyan-accent);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-headline {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      color: var(--gold-light);
+      margin-bottom: 0.4rem;
+    }
+
+    .loading-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.4rem;
+      min-height: 2.5em;
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan-accent), var(--gold-bright));
+      transition: width 0.35s ease-out;
+    }
+
+    .loading-stats {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--text-dim);
+    }
+
+    /* Certificate Section */
+    .certificate-section {
+      margin-top: 1.5rem;
+    }
+
+    .cert-toolbar {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .btn-tool {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.3rem;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: rgba(25, 20, 48, 0.85);
+      border: 1px solid var(--gold-border);
+      color: var(--text-main);
+      transition: all 0.25s ease;
+    }
+
+    .btn-tool:hover {
+      background: rgba(45, 35, 80, 0.95);
+      border-color: var(--gold-bright);
+      color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-tool.primary {
+      background: linear-gradient(135deg, #d4af37, #9b7218);
+      color: #0d091b;
+      font-weight: 700;
+      border: none;
+    }
+
+    /* Certificate Outer Parchment Frame */
+    .certificate-frame {
+      position: relative;
+      background: radial-gradient(circle at 50% 30%, #17112d 0%, #0c081a 100%);
+      border: 2px double var(--gold-primary);
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.8), 0 0 50px rgba(212, 175, 55, 0.2);
+    }
+
+    .certificate-inner {
+      position: relative;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: 8px;
+      padding: 2.2rem 2.2rem;
+      background: 
+        radial-gradient(ellipse at 50% 50%, rgba(212, 175, 55, 0.04) 0%, transparent 70%),
+        repeating-linear-gradient(45deg, rgba(212, 175, 55, 0.015) 0px, rgba(212, 175, 55, 0.015) 2px, transparent 2px, transparent 8px);
+    }
+
+    .cert-header {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .cert-ministry {
+      font-family: var(--font-serif);
+      font-size: 0.76rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .cert-title {
+      font-family: var(--font-serif);
+      font-size: 2.1rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.3rem;
+    }
+
+    .cert-decree {
+      font-family: var(--font-serif);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    .cert-recipient {
+      text-align: center;
+      background: rgba(212, 175, 55, 0.05);
+      border-top: 1px solid rgba(212, 175, 55, 0.25);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .recipient-name {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.3rem;
+    }
+
+    .recipient-meta {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .recipient-meta strong { color: var(--gold-light); }
+
+    /* The 3 Findings Grid */
+    .findings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .finding-card {
+      background: rgba(14, 10, 28, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 10px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .finding-card:hover {
+      border-color: var(--gold-primary);
+      background: rgba(22, 16, 44, 0.95);
+      transform: translateY(-2px);
+    }
+
+    .card-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-serif);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .card-headline {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    .card-body {
+      font-size: 0.82rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      flex-grow: 1;
+    }
+
+    .field-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .field-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+    }
+
+    .field-val {
+      color: var(--gold-light);
+      font-weight: 500;
+    }
+
+    .field-val.highlight {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .field-val.coords {
+      font-family: var(--font-mono);
+      color: var(--cyan-accent);
+    }
+
+    .field-val.price {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--emerald-accent);
+    }
+
+    .verdict-box {
+      margin-top: 0.5rem;
+      padding: 0.55rem 0.7rem;
+      background: rgba(212, 175, 55, 0.08);
+      border-left: 3px solid var(--gold-bright);
+      border-radius: 4px;
+    }
+
+    .verdict-bold {
+      font-weight: 800;
+      font-size: 0.88rem;
+      color: #ffffff;
+      line-height: 1.35;
+    }
+
+    .card-desc {
+      margin-top: 0.6rem;
+      padding-top: 0.6rem;
+      border-top: 1px dashed rgba(212, 175, 55, 0.2);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      font-style: italic;
+    }
+
+    /* Wax Seal & Footer */
+    .cert-footer {
+      display: grid;
+      grid-template-columns: 130px 1fr 180px;
+      align-items: center;
+      gap: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .wax-seal {
+      position: relative;
+      width: 84px;
+      height: 84px;
+      margin: 0 auto;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #e6be44 0%, #aa771c 65%, #6a490d 100%);
+      border: 3px solid #ffd700;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .wax-seal:hover { transform: rotate(5deg) scale(1.05); }
+
+    .seal-text {
+      font-family: var(--font-serif);
+      font-size: 0.52rem;
+      font-weight: 900;
+      color: #2b1a03;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .seal-icon { font-size: 1.1rem; display: block; margin: 0.1rem 0; }
+
+    /* Stamp Thump Animation */
+    .wax-seal.stamp-thump {
+      animation: sealStampThump 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes sealStampThump {
+      0% { transform: scale(2.6) rotate(-20deg); opacity: 0; }
+      65% { transform: scale(0.92) rotate(2deg); opacity: 1; }
+      82% { transform: scale(1.06) rotate(-1deg); }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    .wax-seal::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid #ffd700;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .wax-seal.stamp-thump::after {
+      animation: sealShockwave 0.65s cubic-bezier(0.1, 0.8, 0.3, 1) 0.28s forwards;
+    }
+
+    @keyframes sealShockwave {
+      0% { transform: scale(0.8); opacity: 0.95; box-shadow: 0 0 20px #ffd700; }
+      100% { transform: scale(2.4); opacity: 0; box-shadow: 0 0 40px transparent; }
+    }
+
+    .certificate-frame.certificate-shudder {
+      animation: certificateThumpShudder 0.3s ease-out 0.3s forwards;
+    }
+
+    @keyframes certificateThumpShudder {
+      0%, 100% { transform: translateY(0); }
+      25% { transform: translateY(3px); }
+      50% { transform: translateY(-2px); }
+    }
+
+    .cert-signatures {
+      display: flex;
+      justify-content: space-around;
+      gap: 1rem;
+    }
+
+    .sig-block { text-align: center; flex: 1; }
+    .sig-script {
+      font-family: var(--font-script);
+      font-size: 1.7rem;
+      color: #f5e4a8;
+      height: 1.8rem;
+    }
+    .sig-line {
+      height: 1px;
+      background: rgba(212, 175, 55, 0.4);
+      margin: 0.25rem auto;
+      width: 90%;
+    }
+    .sig-role {
+      font-family: var(--font-serif);
+      font-size: 0.64rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    .cert-barcode { text-align: right; }
+    .barcode-lines {
+      height: 32px;
+      background: repeating-linear-gradient(90deg, #fff 0px, #fff 2px, transparent 2px, transparent 5px, #fff 5px, #fff 8px, transparent 8px, transparent 10px);
+      opacity: 0.8;
+      margin-bottom: 0.25rem;
+    }
+    .barcode-text {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--gold-light);
+    }
+
+    /* Disclaimer at Certificate Bottom */
+    .cert-disclaimer {
+      text-align: center;
+      padding-top: 1.2rem;
+      margin-top: 1.2rem;
+      border-top: 1px dashed rgba(212, 175, 55, 0.2);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    /* Toast */
+    .toast-msg {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: rgba(18, 14, 36, 0.95);
+      border: 1px solid var(--gold-primary);
+      color: #ffffff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      z-index: 300;
+      pointer-events: none;
+      opacity: 0;
+      transition: all 0.35s ease;
+    }
+    .toast-msg.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 860px) {
+      .findings-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .cert-footer { grid-template-columns: 1fr; text-align: center; }
+      .cert-barcode { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="app-container">
+    <header class="app-header">
+      <div class="bureau-badge">
+        <span>✦ Interdimensional Directorate of Karmic Reallocation ✦</span>
+      </div>
+      <h1 class="app-title">
+        <span class="title-white">Certi</span><span class="title-gold">Fate</span>
+      </h1>
+      <p class="app-tagline">The Supreme Certified Destiny Generator</p>
+      <p class="app-subtext">Enter your earthly identifiers to initiate an official astral audit of your forthcoming incarnation, geographic anchor, and financial fate.</p>
+    </header>
+
+    <!-- Form Section -->
+    <section class="generator-card">
+      <form id="destinyForm" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="fullName">Earthly Legal / Chosen Name</label>
+            <input type="text" id="fullName" value="Arthur Dent" placeholder="Enter your full name" required maxlength="60">
+          </div>
+          <div class="form-group">
+            <label for="birthDate">Date of Terrestrial Arrival (DOB)</label>
+            <input type="date" id="birthDate" value="1978-03-11" required>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="processBtn" class="btn-process">✨ Process My Destiny</button>
+          <button type="button" id="randomBtn" class="btn-random">🎲 Roll Random Soul</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Fake Processing Loading Overlay (1-2s Delay) -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+      <div class="loading-box">
+        <div class="loading-spinner"></div>
+        <h2 class="loading-headline" id="loadingHeadline">Consulting The Cosmos...</h2>
+        <p class="loading-desc" id="loadingDesc">Establishing quantum handshake with Akashic database...</p>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+        <div class="loading-stats">
+          <span id="loadingPercent">0%</span>
+          <span id="computingTag">COMPUTING: ASTRAL_HASH</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Certificate Section -->
+    <section class="certificate-section" id="certSection" style="display: none;">
+      <div class="cert-toolbar">
+        <button type="button" id="downloadPngBtn" class="btn-tool primary">🖼️ Download Certificate (.PNG)</button>
+        <button type="button" onclick="window.print()" class="btn-tool">🖨️ Print Certificate</button>
+        <button type="button" id="copyVerdictBtn" class="btn-tool">📋 Copy Fate Verdict</button>
+      </div>
+
+      <article class="certificate-frame" id="certFrame">
+        <div class="certificate-inner">
+          <header class="cert-header">
+            <p class="cert-ministry">THE SUPREME ASTRAL COUNCIL OF METEMPSYCHOSIS &amp; FATE</p>
+            <h2 class="cert-title">CERTIFICATE OF PREDESTINED DESTINY</h2>
+            <p class="cert-decree">THIS DULY ATTESTS THAT BY VIRTUE OF CELESTIAL AUDIT AND QUANTUM KARMIC LAW:</p>
+          </header>
+
+          <section class="cert-recipient">
+            <div class="recipient-name" id="certName">ARTHUR DENT</div>
+            <div class="recipient-meta">
+              <span>Terrestrial Arrival: <strong id="certDob">March 11, 1978</strong></span>
+              <span>•</span>
+              <span>Registry: <strong id="certSerial">CF-2026-8842-OMEGA</strong></span>
+              <span>•</span>
+              <span>Classification: <strong>IRREVOCABLE</strong></span>
+            </div>
+          </section>
+
+          <!-- The 3 Findings Grid -->
+          <div class="findings-grid">
+            
+            <!-- Factor 1: Reincarnation -->
+            <div class="finding-card">
+              <div class="card-badge">🐾 FACTOR #1 : REINCARNATION</div>
+              <h3 class="card-headline" id="f1Headline">Sentient Capybara</h3>
+              <div class="card-body">
+                <div class="field-row">
+                  <span class="field-label">Allocated Form:</span>
+                  <span class="field-val highlight" id="f1Species">Hydrochoerus hydrochaeris</span>
+                </div>
+                <div class="field-row">
+                  <span class="field-label">Assigned Realm:</span>
+                  <span class="field-val" id="f1Country">Kingdom of Norway</span>
+                </div>
+                <p class="card-desc" id="f1Desc">Awarded divine sanctuary status, unlimited thermal bath privileges, and zero mortal stress.</p>
+              </div>
+            </div>
+
+            <!-- Factor 2: Geographic Destiny -->
+            <div class="finding-card">
+              <div class="card-badge">📍 FACTOR #2 : GEOGRAPHICAL LOCATION</div>
+              <h3 class="card-headline" id="f2Headline">Bergen, Vestland, Norway</h3>
+              <div class="card-body">
+                <div class="field-row">
+                  <span class="field-label">Spatial Coordinates:</span>
+                  <span class="field-val coords" id="f2Coords">60.3913° N, 5.3221° E</span>
+                </div>
+                <div class="field-row">
+                  <span class="field-label">Geographical Epicenter:</span>
+                  <span class="field-val highlight" id="f2Location">Bergen, Vestland, Norway</span>
+                </div>
+                <p class="card-desc" id="f2Desc">Spiritual tether permanently bound to this geomagnetic planetary coordinate node.</p>
+              </div>
+            </div>
+
+            <!-- Factor 3: Wealth Destiny -->
+            <div class="finding-card">
+              <div class="card-badge">💰 FACTOR #3 : WEALTH</div>
+              <h3 class="card-headline" id="f3Headline">Silk Road Magnate</h3>
+              <div class="card-body">
+                <div class="field-row">
+                  <span class="field-label">Projected Net Worth:</span>
+                  <span class="field-val highlight" id="f3Price">48,500 Venetian Gold Ducats</span>
+                </div>
+                <div class="field-row">
+                  <span class="field-label">Allocated Holdings:</span>
+                  <span class="field-val" id="f3Ticker">3 Armed Caravels, Silk Bales &amp; Royal Immunity</span>
+                </div>
+                <p class="card-desc" id="f3Desc">Decreed sovereign commercial privilege and abundant royal treasures by celestial fortune.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Certificate Footer & Signatures -->
+          <footer class="cert-footer">
+            <div class="wax-seal" id="waxSeal" title="Click to inspect seal">
+              <div class="seal-text">
+                <span class="seal-icon">⚖️</span>
+                BUREAU OF FATE<br>
+                <strong>VERIFIED</strong>
+              </div>
+            </div>
+
+            <div class="cert-signatures">
+              <div class="sig-block">
+                <div class="sig-script">Pranav</div>
+                <div class="sig-line"></div>
+                <div class="sig-role">Lord High Registrar of Metempsychosis</div>
+              </div>
+              <div class="sig-block">
+                <div class="sig-script">Sreehari</div>
+                <div class="sig-line"></div>
+                <div class="sig-role">Chief Geocoding Cartographer</div>
+              </div>
+            </div>
+
+            <div class="cert-barcode">
+              <div class="barcode-lines"></div>
+              <div class="barcode-text" id="barcodeText">CF-2026-VOID</div>
+            </div>
+          </footer>
+
+          <!-- Mandatory Legal & Cosmic Disclaimer -->
+          <div class="cert-disclaimer">
+            Not financial advice. Not any advice. Issued purely for recreational and reincarnational contemplation.
+          </div>
+
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <div class="toast-msg" id="toastMsg"></div>
+
+  <!-- Single File Embedded Logic -->
+  <script>
+    (function () {
+      'use strict';
+
+      // 1. Hardcoded Animal & Country Lists (Finding #1)
+      const ANIMALS = [
+        'Sentient Capybara of Perpetual Tranquility',
+        'Hyper-Caffeinated Red Panda Diplomat',
+        'Zen-Master Three-Toed Sloth',
+        'Existential Goth Raven Poet',
+        'Sub-Atomic Raccoon Trash Alchemist',
+        'Perpetually Overdressed Antarctic Penguin',
+        'Square-Physics Wombat Earthshaker',
+        'Master Sea Otter of Floating Philosophy',
+        'Disapproving Astral Barn Owl',
+        'Cosmic Solar-Seeking Orange Tabby'
+      ];
+
+      const COUNTRIES = [
+        'Kingdom of Norway',
+        'Japan (Kyoto Outskirts)',
+        'Swiss Alps, Switzerland',
+        'South Island, New Zealand',
+        'Highlands of Scotland',
+        'Costa Rican Cloud Forest',
+        'Faroe Islands',
+        'Tasmania, Australia',
+        'Galápagos Islands, Ecuador',
+        'Reykjavik Geothermal Basin, Iceland'
+      ];
+
+      // 2. Verified Landmarks Fallback for Geo-Destiny (Finding #2)
+      const GEO_FALLBACKS = [
+        { lat: 60.3913, lon: 5.3221, place: 'Bergen, Vestland, Norway' },
+        { lat: 35.0116, lon: 135.7681, place: 'Kyoto, Kansai Region, Japan' },
+        { lat: -44.6715, lon: 167.9256, place: 'Milford Sound, Southland, New Zealand' },
+        { lat: 46.5583, lon: 7.9822, place: 'Jungfrau Region, Bernese Alps, Switzerland' },
+        { lat: 64.1466, lon: -21.9426, place: 'Reykjavík, Capital Region, Iceland' },
+        { lat: -0.7402, lon: -90.3134, place: 'Santa Cruz Island, Galápagos, Ecuador' },
+        { lat: 57.3229, lon: -4.4244, place: 'Loch Ness, Inverness-shire, Scotland' },
+        { lat: 78.2232, lon: 15.6267, place: 'Longyearbyen, Svalbard Archipelago' },
+        { lat: -13.1631, lon: -72.5450, place: 'Machu Picchu, Urubamba, Peru' },
+        { lat: 9.7489, lon: -83.7534, place: 'Monteverde Cloud Forest, Costa Rica' }
+      ];
+
+      // 3. Cosmic Wealth Destinies (Factor #3)
+      const WEALTH_DESTINIES = [
+        {
+          tier: 'Silk Road Caravan Magnate',
+          netWorth: '65,000 Persian Gold Dinars',
+          holdings: '40 Royal Camels, 120 Saffron Chests, Sovereign Caravan Rights',
+          decree: 'Endless desert trade convoys bearing royal frankincense, lapis lazuli, and untaxed gold.'
+        },
+        {
+          tier: 'Venetian Merchant Doge & Grand Treasurer',
+          netWorth: '120,000 Venetian Gold Ducats',
+          holdings: '5 Armed War Caravels, Grand Canal Marble Palazzo, Royal Tax Exemption',
+          decree: 'Sovereign naval trade monopolies across all Mediterranean and Byzantine ports.'
+        },
+        {
+          tier: 'Florentine Guild Master & Patrician',
+          netWorth: '38,000 Florentine Silver Florins',
+          holdings: '2 Merchant Cogs, Cathedral District Workshop, 45 Bales of Damask Silk',
+          decree: 'Honored civic prestige, high guild council authority, and flourishing trading houses.'
+        },
+        {
+          tier: 'Feudal Castle Lord & Estate Baron',
+          netWorth: '24,000 Bohemian Silver Thalers',
+          holdings: 'Stone Hilltop Keep, 4 Terraced Vineyards, Sovereign Grain Milling Monopolies',
+          decree: 'Bountiful seasonal harvests, loyal estate stewards, and peaceful hereditary lands.'
+        },
+        {
+          tier: 'Respected Master Artisan & Scribe',
+          netWorth: '4,800 Copper Shillings & 4 Milk Cows',
+          holdings: 'Stone Hearth Forge, 4 Cast Anvils, 12 Illuminated Vellum Ledgers',
+          decree: 'Honest renown for flawless craft, crackling warm hearths, and peaceful independence.'
+        },
+        {
+          tier: 'Desert Oasis Chieftain & Gem Custodian',
+          netWorth: '1,800 Silver Dirhams',
+          holdings: 'Prizewinning Arabian Stallion, Deep Artesian Well, Leather Pouch of Rubies',
+          decree: 'Guardian of desert waters and night skies, commanding the allegiance of passing caravans.'
+        },
+        {
+          tier: 'Wandering Ascetic & Philosophical Monk',
+          netWorth: '14 Tarnished Copper Groats',
+          holdings: 'Carved Walking Staff, Handspun Woolen Robe, Brass Meditation Bell',
+          decree: 'Attained supreme spiritual liberation, blessed with absolute immunity from worldly debt.'
+        }
+      ];
+
+      // Audio Synthesizer
+      let audioCtx = null;
+      function getAudio() {
+        if (!audioCtx) {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (AC) audioCtx = new AC();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+        return audioCtx;
+      }
+
+      function playStampThud() {
+        try {
+          const ctx = getAudio();
+          if (!ctx) return;
+          const now = ctx.currentTime;
+          
+          // Sub-bass impact
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(160, now);
+          osc.frequency.exponentialRampToValueAtTime(36, now + 0.22);
+          gain.gain.setValueAtTime(0.45, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.26);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.28);
+
+          // Paper click
+          const snap = ctx.createOscillator();
+          const snapGain = ctx.createGain();
+          snap.type = 'triangle';
+          snap.frequency.setValueAtTime(340, now);
+          snap.frequency.exponentialRampToValueAtTime(75, now + 0.07);
+          snapGain.gain.setValueAtTime(0.3, now);
+          snapGain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+          snap.connect(snapGain);
+          snapGain.connect(ctx.destination);
+          snap.start(now);
+          snap.stop(now + 0.09);
+        } catch (e) {}
+      }
+
+      function playTone(freq, duration) {
+        try {
+          const ctx = getAudio();
+          if (!ctx) return;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.08, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + duration);
+        } catch(e) {}
+      }
+
+      // Hash calculations requested:
+      // Finding 1: sum of char codes in name + sum of day+month+year in DOB
+      function calculateSeeds(name, dob) {
+        let nameCharSum = 0;
+        for (let i = 0; i < name.length; i++) {
+          nameCharSum += name.charCodeAt(i);
+        }
+
+        const dateParts = dob.split('-').map(Number); // [YYYY, MM, DD]
+        const dobSum = (dateParts[0] || 1990) + (dateParts[1] || 1) + (dateParts[2] || 1);
+        const combinedSeed = Math.abs(nameCharSum + dobSum);
+
+        return {
+          nameSum: nameCharSum,
+          dobSum: dobSum,
+          seed: combinedSeed
+        };
+      }
+
+      // BigDataCloud Free Reverse Geocoding API with Graceful Fallback
+      async function resolveGeoDestiny(dob, seed) {
+        const parts = dob.split('-').map(Number);
+        const year = parts[0] || 1990;
+        const month = parts[1] || 1;
+        const day = parts[2] || 1;
+
+        // Arbitrary math converting DOB to fake latitude/longitude as requested
+        let lat = Number((((day * 3.1415 + month * 7.2) % 140) - 70).toFixed(4));
+        let lon = Number((((year * 1.618 + day * 11.3) % 360) - 180).toFixed(4));
+
+        const fallback = GEO_FALLBACKS[seed % GEO_FALLBACKS.length];
+        let locationName = fallback.place;
+
+        try {
+          const controller = new AbortController();
+          const timeout = setTimeout(() => controller.abort(), 2000);
+          const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`;
+          const res = await fetch(url, { signal: controller.signal });
+          clearTimeout(timeout);
+
+          if (res.ok) {
+            const data = await res.json();
+            const segments = [];
+            if (data.city || data.locality) segments.push(data.city || data.locality);
+            if (data.principalSubdivision) segments.push(data.principalSubdivision);
+            if (data.countryName) segments.push(data.countryName);
+            if (segments.length > 0) {
+              locationName = segments.join(', ');
+            }
+          }
+        } catch (e) {
+          // Fallback gracefully
+          lat = fallback.lat;
+          lon = fallback.lon;
+        }
+
+        const latStr = `${Math.abs(lat)}° ${lat >= 0 ? 'N' : 'S'}`;
+        const lonStr = `${Math.abs(lon)}° ${lon >= 0 ? 'E' : 'W'}`;
+
+        return {
+          coords: `${latStr}, ${lonStr}`,
+          location: locationName
+        };
+      }
+
+      // Fake-processing delay sequence (1-2 seconds)
+      function runFakeProcessing() {
+        return new Promise((resolve) => {
+          const overlay = document.getElementById('loadingOverlay');
+          const fill = document.getElementById('progressFill');
+          const percent = document.getElementById('loadingPercent');
+          const headline = document.getElementById('loadingHeadline');
+          const desc = document.getElementById('loadingDesc');
+          const tag = document.getElementById('computingTag');
+
+          overlay.style.display = 'flex';
+          fill.style.width = '0%';
+
+          const steps = [
+            { pct: 28, head: 'Computing Astral Harmonics...', desc: 'Mapping name character codes and terrestrial arrival vector...' },
+            { pct: 58, head: 'Querying Celestial Cartography...', desc: 'Resolving coordinates via celestial reverse geocoding lattice...' },
+            { pct: 85, head: 'Consulting Cosmic Wealth Oracle...', desc: 'Determining past-life karmic credit and material fortune...' },
+            { pct: 100, head: 'Engraving Certified Parchment...', desc: 'Affixing seal of the Supreme Astral Metempsychosis Directorate...' }
+          ];
+
+          let idx = 0;
+          function tick() {
+            if (idx >= steps.length) {
+              setTimeout(() => {
+                overlay.style.display = 'none';
+                resolve();
+              }, 180);
+              return;
+            }
+            const s = steps[idx];
+            fill.style.width = s.pct + '%';
+            percent.textContent = s.pct + '%';
+            headline.textContent = s.head;
+            desc.textContent = s.desc;
+            tag.textContent = 'COMPUTING: 0x' + Math.floor(Math.random() * 0xffffff).toString(16).toUpperCase();
+            playTone(360 + idx * 100, 0.2);
+
+            idx++;
+            setTimeout(tick, 410); // 4 * 410ms = 1.64s
+          }
+          tick();
+        });
+      }
+
+      // Main Orchestrator
+      let currentCertData = null;
+
+      async function handleProcess(e) {
+        if (e) e.preventDefault();
+
+        const name = document.getElementById('fullName').value.trim() || 'Arthur Dent';
+        const dob = document.getElementById('birthDate').value || '1978-03-11';
+
+        const { nameSum, dobSum, seed } = calculateSeeds(name, dob);
+
+        // Start 1.6s visual delay and async API calls concurrently
+        const delayPromise = runFakeProcessing();
+
+        // 1. Factor #1: Reincarnation
+        const animal = ANIMALS[seed % ANIMALS.length];
+        const country = COUNTRIES[(seed * 3) % COUNTRIES.length];
+
+        // 2. Factor #2: Geographic Destiny via BigDataCloud
+        const geoPromise = resolveGeoDestiny(dob, seed);
+
+        // 3. Factor #3: Wealth Destiny (Cosmic prediction)
+        const wealth = WEALTH_DESTINIES[(seed + Math.floor(Math.random() * WEALTH_DESTINIES.length)) % WEALTH_DESTINIES.length];
+
+        const [_, geoData] = await Promise.all([delayPromise, geoPromise]);
+
+        const serial = `CF-2026-${(seed % 9000 + 1000)}-${['ALPHA','BETA','OMEGA','PRIME','VOID'][seed % 5]}`;
+        const dobFormatted = new Date(dob).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+        // Update DOM
+        document.getElementById('certName').textContent = name.toUpperCase();
+        document.getElementById('certDob').textContent = dobFormatted;
+        document.getElementById('certSerial').textContent = serial;
+        document.getElementById('barcodeText').textContent = serial;
+
+        // Factor 1: Reincarnation
+        document.getElementById('f1Headline').textContent = `${animal.split(' ')[1] || animal} in ${country.split(',')[0]}`;
+        document.getElementById('f1Species').textContent = animal;
+        document.getElementById('f1Country').textContent = country;
+
+        // Factor 2: Geographical Location
+        document.getElementById('f2Headline').textContent = geoData.location.split(',')[0];
+        document.getElementById('f2Coords').textContent = geoData.coords;
+        document.getElementById('f2Location').textContent = geoData.location;
+
+        // Factor 3: Wealth Destiny
+        document.getElementById('f3Headline').textContent = wealth.tier;
+        document.getElementById('f3Price').textContent = wealth.netWorth;
+        document.getElementById('f3Ticker').textContent = wealth.holdings;
+        document.getElementById('f3Desc').textContent = wealth.decree;
+
+        currentCertData = {
+          name, dobFormatted, serial, animal, country, geoData, wealth
+        };
+
+        // Reveal Certificate
+        const section = document.getElementById('certSection');
+        section.style.display = 'block';
+        section.scrollIntoView({ behavior: 'smooth' });
+
+        // Visual Stamp Thump & Shockwave + Audio
+        const seal = document.getElementById('waxSeal');
+        const frame = document.getElementById('certFrame');
+        setTimeout(() => {
+          seal.classList.remove('stamp-thump');
+          frame.classList.remove('certificate-shudder');
+          void seal.offsetWidth;
+          seal.classList.add('stamp-thump');
+          frame.classList.add('certificate-shudder');
+          playStampThud();
+        }, 400);
+
+        showToast('✨ Destiny Processed & Officially Sealed!');
+      }
+
+      function showToast(msg) {
+        const toast = document.getElementById('toastMsg');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      }
+
+      // Download Certificate as PNG via Canvas
+      function downloadPng() {
+        if (!currentCertData) return;
+        const canvas = document.createElement('canvas');
+        canvas.width = 1600;
+        canvas.height = 1200;
+        const ctx = canvas.getContext('2d');
+
+        // Background
+        const bgGrad = ctx.createRadialGradient(800, 360, 100, 800, 600, 1100);
+        bgGrad.addColorStop(0, '#1a1334');
+        bgGrad.addColorStop(0.6, '#0f0b20');
+        bgGrad.addColorStop(1, '#06040d');
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, 1600, 1200);
+
+        // Gold Border
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = '#d4af37';
+        ctx.strokeRect(40, 40, 1520, 1120);
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = 'rgba(212, 175, 55, 0.4)';
+        ctx.strokeRect(52, 52, 1496, 1096);
+
+        // Header
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#d4af37';
+        ctx.font = '700 13px "Cinzel", serif';
+        ctx.fillText('THE SUPREME ASTRAL COUNCIL OF METEMPSYCHOSIS & FATE', 800, 110);
+
+        ctx.fillStyle = '#ffd700';
+        ctx.font = '900 36px "Cinzel", serif';
+        ctx.fillText('CERTIFICATE OF PREDESTINED DESTINY', 800, 160);
+
+        // Recipient
+        ctx.fillStyle = 'rgba(212, 175, 55, 0.08)';
+        ctx.fillRect(380, 195, 840, 80);
+        ctx.strokeStyle = 'rgba(212, 175, 55, 0.35)';
+        ctx.strokeRect(380, 195, 840, 80);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 28px "Cinzel", serif';
+        ctx.fillText(currentCertData.name.toUpperCase(), 800, 242);
+        ctx.fillStyle = '#d4af37';
+        ctx.font = '12px "Space Mono", monospace';
+        ctx.fillText(`DOB: ${currentCertData.dobFormatted}  •  RECORD: ${currentCertData.serial}  •  STATUS: IRREVOCABLE`, 800, 264);
+
+        // 3 Finding Cards
+        const cardW = 440;
+        const cardH = 460;
+        const cardY = 310;
+        const startX = 140;
+        const gap = 30;
+
+        const cards = [
+          {
+            badge: 'FACTOR #1 : REINCARNATION',
+            title: currentCertData.animal,
+            k1: 'ASSIGNED REALM / HAVEN:',
+            v1: currentCertData.country,
+            k2: 'STATUS:',
+            v2: 'Approved for Maximum Leisure Privileges'
+          },
+          {
+            badge: 'FACTOR #2 : GEOGRAPHICAL LOCATION',
+            title: currentCertData.geoData.location,
+            k1: 'KARMIC COORDINATES:',
+            v1: currentCertData.geoData.coords,
+            k2: 'EPICENTER:',
+            v2: 'Geomagnetic Node Verified'
+          },
+          {
+            badge: 'FACTOR #3 : WEALTH',
+            title: currentCertData.wealth.tier,
+            k1: 'PROJECTED NET WORTH:',
+            v1: currentCertData.wealth.netWorth,
+            k2: 'ALLOCATED HOLDINGS:',
+            v2: currentCertData.wealth.holdings
+          }
+        ];
+
+        cards.forEach((c, i) => {
+          const cx = startX + i * (cardW + gap);
+          ctx.fillStyle = 'rgba(14, 10, 28, 0.9)';
+          ctx.fillRect(cx, cardY, cardW, cardH);
+          ctx.strokeStyle = 'rgba(212, 175, 55, 0.35)';
+          ctx.strokeRect(cx, cardY, cardW, cardH);
+
+          ctx.textAlign = 'left';
+          ctx.fillStyle = '#ffd700';
+          ctx.font = 'bold 11px "Cinzel", serif';
+          ctx.fillText(c.badge, cx + 22, cardY + 36);
+
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 16px "Cinzel", serif';
+          wrapText(ctx, c.title, cx + 22, cardY + 70, cardW - 44, 22);
+
+          ctx.fillStyle = '#8f88a8';
+          ctx.font = '600 11px "Outfit", sans-serif';
+          ctx.fillText(c.k1, cx + 22, cardY + 160);
+
+          ctx.fillStyle = i === 2 ? '#ffd700' : '#fce49c';
+          ctx.font = i === 2 ? 'bold 16px "Space Mono", monospace' : '500 13px "Outfit", sans-serif';
+          wrapText(ctx, c.v1, cx + 22, cardY + 185, cardW - 44, 20);
+
+          ctx.fillStyle = '#8f88a8';
+          ctx.font = '600 11px "Outfit", sans-serif';
+          ctx.fillText(c.k2, cx + 22, cardY + 260);
+
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 14px "Outfit", sans-serif';
+          wrapText(ctx, c.v2, cx + 22, cardY + 285, cardW - 44, 22);
+        });
+
+        // Signatures
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#fce49c';
+        ctx.font = 'italic 24px "Alex Brush", cursive';
+        ctx.fillText('Pranav', 660, 890);
+        ctx.fillText('Sreehari', 940, 890);
+
+        ctx.fillStyle = '#8f88a8';
+        ctx.font = '600 10px "Cinzel", serif';
+        ctx.fillText('LORD HIGH REGISTRAR OF METEMPSYCHOSIS', 660, 920);
+        ctx.fillText('CHIEF GEOCODING CARTOGRAPHER', 940, 920);
+
+        // Disclaimer
+        ctx.fillStyle = '#8f88a8';
+        ctx.font = 'italic 12px "Outfit", sans-serif';
+        ctx.fillText('Issued purely for recreational and reincarnational contemplation by the Supreme Astral Council.', 800, 1100);
+
+        // Trigger download
+        const a = document.createElement('a');
+        a.download = `CertiFate_${currentCertData.name.replace(/\s+/g, '_')}.png`;
+        a.href = canvas.toDataURL('image/png');
+        a.click();
+        showToast('✅ Certificate PNG downloaded!');
+      }
+
+      function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+        if (!text) return;
+        const words = text.split(' ');
+        let line = '';
+        for (let n = 0; n < words.length; n++) {
+          const test = line + words[n] + ' ';
+          if (ctx.measureText(test).width > maxWidth && n > 0) {
+            ctx.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          } else {
+            line = test;
+          }
+        }
+        ctx.fillText(line, x, y);
+      }
+
+      function copyVerdict() {
+        if (!currentCertData) return;
+        const t = `📜 OFFICIAL CERTIFICATE OF DESTINY (CertiFate)
+Recipient: ${currentCertData.name} (${currentCertData.dobFormatted})
+Record: ${currentCertData.serial}
+
+🐾 Factor #1 (Reincarnation): ${currentCertData.animal} in ${currentCertData.country}
+📍 Factor #2 (Geographical Location): ${currentCertData.geoData.location} (${currentCertData.geoData.coords})
+💰 Factor #3 (Wealth): ${currentCertData.wealth.tier} (${currentCertData.wealth.netWorth})
+Holdings: ${currentCertData.wealth.holdings}
+Decree: ${currentCertData.wealth.decree}
+
+✍️ Notarized by:
+• Pranav (Lord High Registrar of Metempsychosis)
+• Sreehari (Chief Geocoding Cartographer)
+
+Issued purely for recreational and reincarnational contemplation by the Supreme Astral Council.`;
+
+        navigator.clipboard.writeText(t).then(() => showToast('📋 Fate verdict copied to clipboard!'));
+      }
+
+      // Event Listeners
+      document.getElementById('destinyForm').addEventListener('submit', handleProcess);
+      document.getElementById('randomBtn').addEventListener('click', () => {
+        const roster = [
+          { name: 'Arthur Dent', dob: '1978-03-11' },
+          { name: 'Cleopatra Philopator', dob: '1969-08-12' },
+          { name: 'Nikola Tesla', dob: '1856-07-10' },
+          { name: 'Ada Lovelace', dob: '1815-12-10' },
+          { name: 'Marie Curie', dob: '1867-11-07' }
+        ];
+        const r = roster[Math.floor(Math.random() * roster.length)];
+        document.getElementById('fullName').value = r.name;
+        document.getElementById('birthDate').value = r.dob;
+        showToast('🎲 Summoned traveler: ' + r.name);
+      });
+
+      document.getElementById('waxSeal').addEventListener('click', () => {
+        const seal = document.getElementById('waxSeal');
+        const frame = document.getElementById('certFrame');
+        seal.classList.remove('stamp-thump');
+        frame.classList.remove('certificate-shudder');
+        void seal.offsetWidth;
+        seal.classList.add('stamp-thump');
+        frame.classList.add('certificate-shudder');
+        playStampThud();
+        showToast('⚖️ Official Astral Wax Seal Verified & Undisputed!');
+      });
+
+      document.getElementById('downloadPngBtn').addEventListener('click', downloadPng);
+      document.getElementById('copyVerdictBtn').addEventListener('click', copyVerdict);
+
+    })();
+  </script>
+</body>
+</html>

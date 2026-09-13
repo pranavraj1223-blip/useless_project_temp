@@ -1,1 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CertiFate — Bureau of Cosmic Predestination & Destiny Generator</title>
+  <meta name="description"
+    content="Generate your officially certified joke destiny certificate. Discover your next reincarnation animal, geo-destiny reverse-geocoded coordinates, and name-length cosmic resonance.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Alex+Brush&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Starfield & Cosmic Ambient Background -->
+  <div class="cosmos-bg" id="cosmosBg" aria-hidden="true">
+    <canvas id="starfieldCanvas" class="starfield-canvas"></canvas>
+    <div id="cosmicPulseOverlay" class="cosmic-pulse-overlay"></div>
+    <div class="stars-layer-1"></div>
+    <div class="stars-layer-2"></div>
+    <div class="nebula-glow"></div>
+  </div>
+
+  <!-- Audio Controls Floating Pill -->
+  <aside class="audio-widget">
+    <button id="soundToggleBtn" class="sound-pill playing" type="button" aria-label="Toggle Cosmic Audio"
+      title="Toggle Celestial Background Ambience & Sound Effects">
+      <span class="sound-icon" id="soundIcon">🔊</span>
+      <span class="sound-label">Cosmic Ambience: <strong id="soundStatus">ON</strong></span>
+    </button>
+  </aside>
+
+  <!-- Main Container -->
+  <main class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="bureau-badge">
+        <span class="badge-icon">✦</span>
+        <span>Interdimensional Directorate of Karmic Reallocation</span>
+        <span class="badge-icon">✦</span>
+      </div>
+      <h1 class="app-title">
+        <span class="title-glow">Certi</span><span class="title-gold">Fate</span>
+      </h1>
+      <p class="app-tagline">The Supreme Certified Destiny &amp; Reincarnation Engine</p>
+      <p class="app-subtext">Enter your earthly identifiers below to initiate an irrevocable cosmic audit of your
+        forthcoming incarnation.</p>
+    </header>
+
+    <!-- Generator Input Section -->
+    <section class="generator-card" id="generatorCard">
+      <div class="card-ornament top-left"></div>
+      <div class="card-ornament top-right"></div>
+      <div class="card-ornament bottom-left"></div>
+      <div class="card-ornament bottom-right"></div>
+
+      <form id="destinyForm" class="destiny-form" novalidate>
+        <!-- Step 1: Temporal Reincarnation Trajectory (Past vs Future) -->
+        <div class="timeline-selector-container">
+          <div class="timeline-header-row">
+            <span class="timeline-step-badge">PRIMARY CHRONO-INQUIRY</span>
+            <span class="timeline-pulse-dot"></span>
+          </div>
+          <h2 class="timeline-prompt-title">Where shall your soul be reincarnated?</h2>
+          <p class="timeline-prompt-subtitle">Choose your temporal direction. All reincarnations, geographic coordinates, and wealth destinies calibrate to this chosen timeline.</p>
+
+          <div class="timeline-options-grid" role="radiogroup" aria-label="Reincarnation Timeline Selection">
+            <!-- Option: The Ancient Past -->
+            <label class="timeline-option-card past active" id="timelineOptionPast" tabindex="0">
+              <input type="radio" name="timelineTrajectory" value="past" checked class="timeline-radio-input">
+              <div class="timeline-card-glow"></div>
+              <div class="timeline-card-content">
+                <div class="timeline-icon-wrap">
+                  <span class="timeline-icon">⏳</span>
+                  <span class="timeline-badge past-badge">ERA: -CHRONO</span>
+                </div>
+                <h3 class="timeline-card-name">The Ancient Past</h3>
+                <p class="timeline-card-desc">Antiquity, ancient empires, feudal kingdoms, forgotten wonders, or prehistoric wilderness.</p>
+                <div class="timeline-tags">
+                  <span class="t-tag">🏛️ Ancient Dynasties</span>
+                  <span class="t-tag">📜 Lost Wonders</span>
+                  <span class="t-tag">🪙 Gold Ducats &amp; Silk</span>
+                </div>
+              </div>
+              <div class="card-radio-indicator">
+                <span class="check-circle">✓</span>
+              </div>
+            </label>
+
+            <!-- Option: The Distant Future -->
+            <label class="timeline-option-card future" id="timelineOptionFuture" tabindex="0">
+              <input type="radio" name="timelineTrajectory" value="future" class="timeline-radio-input">
+              <div class="timeline-card-glow"></div>
+              <div class="timeline-card-content">
+                <div class="timeline-icon-wrap">
+                  <span class="timeline-icon">🚀</span>
+                  <span class="timeline-badge future-badge">ERA: +CHRONO</span>
+                </div>
+                <h3 class="timeline-card-name">The Distant Future</h3>
+                <p class="timeline-card-desc">Cyberpunk megacities, orbital space elevators, solar Dyson spheres, or deep galactic outposts.</p>
+                <div class="timeline-tags">
+                  <span class="t-tag">🌌 Orbital Skyports</span>
+                  <span class="t-tag">🤖 Cyber-Augments</span>
+                  <span class="t-tag">💳 Sol-Credits &amp; Antimatter</span>
+                </div>
+              </div>
+              <div class="card-radio-indicator">
+                <span class="check-circle">✓</span>
+              </div>
+            </label>
+          </div>
+
+          <!-- Dynamic Timeline Epoch Focus Chips -->
+          <div class="timeline-sub-filter" id="timelineSubFilter">
+            <span class="sub-filter-label" id="subFilterLabel">Attuned Epoch Horizon:</span>
+            <div class="epoch-chips-wrapper" id="epochChipsWrapper">
+              <!-- Populated by JS based on timeline -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Earthly Identifiers & Alphabetical Resonance -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fullName">
+              <span class="label-text">Earthly Legal / Chosen Name</span>
+              <span class="char-count-badge" id="nameCharBadge">0 chars</span>
+            </label>
+            <div class="input-wrapper">
+              <span class="input-icon">👤</span>
+              <input type="text" id="fullName" name="fullName" placeholder="e.g. Arthur Dent or Cleopatra" required
+                autocomplete="name" maxlength="60">
+            </div>
+            
+            <!-- Live Name Resonance Decoder -->
+            <div class="alpha-code-box" id="alphaCodeBox">
+              <div class="alpha-code-header">
+                <span class="alpha-code-label">✨ Soul Frequency Resonance:</span>
+                <span class="alpha-code-sum" id="alphaCodeSumBadge">Harmonic Value: 0</span>
+              </div>
+              <div class="alpha-code-breakdown" id="alphaCodeBreakdown">
+                <span class="alpha-empty-hint">Enter your name to channel cosmic resonance...</span>
+              </div>
+            </div>
+            
+            <span class="input-hint">Aligns your spiritual coordinates with the cosmic metempsychosis matrix.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="birthDate">
+              <span class="label-text">Date of Terrestrial Arrival (DOB)</span>
+            </label>
+            <div class="input-wrapper">
+              <span class="input-icon">🪐</span>
+              <input type="date" id="birthDate" name="birthDate" required max="2030-12-31">
+            </div>
+            <span class="input-hint">Aligns planetary telemetry with your chosen temporal axis.</span>
+
+            <!-- Quick Soul Archetype Summoner -->
+            <div class="quick-summon-box">
+              <span class="quick-summon-label">Summon Historical/Futuristic Traveler:</span>
+              <div class="quick-summon-pills" id="quickSummonPills">
+                <!-- Populated dynamically by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <button type="submit" id="generateBtn" class="btn-cosmic">
+            <span class="btn-sparkle">✨</span>
+            <span class="btn-text" id="generateBtnText">Cast My Soul Across Time</span>
+            <span class="btn-sparkle">✨</span>
+            <div class="btn-flare"></div>
+          </button>
+
+          <button type="button" id="randomizeBtn" class="btn-secondary" title="Fill with a random historical traveler">
+            🎲 Roll Random Soul
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Celestial Loading Sequence Modal / Overlay -->
+    <section class="loading-overlay" id="loadingOverlay" aria-hidden="true" style="display: none;">
+      <div class="loading-box">
+        <div class="celestial-gyro">
+          <div class="gyro-ring outer"></div>
+          <div class="gyro-ring middle"></div>
+          <div class="gyro-ring inner"></div>
+          <div class="gyro-core">✦</div>
+        </div>
+
+        <h2 class="loading-headline" id="loadingHeadline">Inquiring The Cosmos...</h2>
+        <p class="loading-step-desc" id="loadingStepDesc">Establishing quantum connection to Akashic database...</p>
+
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-stats">
+          <span id="loadingPercent">0%</span>
+          <span class="protocol-tag" id="protocolTag">PROTOCOL: AKASHIC-7</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificate Presentation View -->
+    <section class="certificate-section" id="certificateSection" style="display: none;">
+      <!-- Action Toolbar -->
+      <nav class="cert-toolbar" aria-label="Certificate Actions">
+        <button type="button" id="shareDestinyBtn" class="btn-tool primary"
+          title="Share certificate with your companions">
+          <span class="icon">📤</span> Share My Destiny
+        </button>
+        <button type="button" id="downloadImageBtn" class="btn-tool"
+          title="Save high-resolution image to your device">
+          <span class="icon">🖼️</span> Download Certificate (.PNG)
+        </button>
+        <button type="button" id="printCertBtn" class="btn-tool" title="Print official parchment copy">
+          <span class="icon">🖨️</span> Print Official Parchment
+        </button>
+        <button type="button" id="copySummaryBtn" class="btn-tool" title="Copy your destiny verdict to clipboard">
+          <span class="icon">📋</span> Copy Fate Verdict
+        </button>
+        <button type="button" id="resetBtn" class="btn-tool outline" title="Generate another destiny">
+          <span class="icon">🔄</span> New Incarnation
+        </button>
+      </nav>
+
+      <!-- The Official Printable & Downloadable Certificate Frame -->
+      <article class="certificate-frame" id="certificateElement">
+        <!-- Certificate Outer Border -->
+        <div class="cert-outer-border">
+          <div class="cert-inner-border">
+
+            <!-- Corner Filigree Ornaments -->
+            <div class="filigree top-left">🙦</div>
+            <div class="filigree top-right">🙧</div>
+            <div class="filigree bottom-left">🙤</div>
+            <div class="filigree bottom-right">🙥</div>
+
+            <!-- Certificate Header Banner -->
+            <header class="cert-header">
+              <div class="cert-bureau-crest">
+                <svg viewBox="0 0 100 100" class="crest-svg" aria-hidden="true">
+                  <circle cx="50" cy="50" r="46" fill="none" stroke="#d4af37" stroke-width="2" stroke-dasharray="3 3" />
+                  <polygon points="50,8 62,38 95,38 68,58 78,90 50,70 22,90 32,58 5,38 38,38"
+                    fill="rgba(212,175,55,0.15)" stroke="#d4af37" stroke-width="1.5" />
+                  <circle cx="50" cy="50" r="14" fill="#120c24" stroke="#d4af37" stroke-width="1.5" />
+                  <text x="50" y="55" font-family="'Cinzel', serif" font-size="12" fill="#f8e79c"
+                    text-anchor="middle">CF</text>
+                </svg>
+              </div>
+              <p class="cert-ministry" id="certMinistry">THE SUPREME ASTRAL COUNCIL OF METEMPSYCHOSIS &amp; FATE</p>
+              <h2 class="cert-grand-title" id="certGrandTitle">CERTIFICATE OF PREDESTINED DESTINY</h2>
+              <p class="cert-decree" id="certDecree">THIS DULY ATTESTS THAT BY VIRTUE OF CELESTIAL AUDIT AND QUANTUM KARMIC LAW:</p>
+            </header>
+
+            <!-- Recipient Subject Identification -->
+            <section class="cert-recipient-block">
+              <div class="recipient-top-row">
+                <span class="recipient-label">Designated Soul / Earthly Subject:</span>
+                <div class="cert-era-pill" id="certEraPill">
+                  <span class="era-pill-icon" id="certEraIcon">⏳</span>
+                  <span class="era-pill-text" id="certEraText">ERA: THE ANCIENT PAST</span>
+                </div>
+              </div>
+              <div class="recipient-name" id="certSubjectName">ARTHUR DENT</div>
+              <div class="recipient-meta">
+                <span>Terrestrial Anchor: <strong id="certSubjectDob">March 11, 1978</strong></span>
+                <span>•</span>
+                <span>Registry Record: <strong id="certSerialNo">CF-2026-8842-OMEGA</strong></span>
+                <span>•</span>
+                <span>Classification: <strong class="cert-badge-gold">IRREVOCABLE</strong></span>
+              </div>
+            </section>
+
+            <!-- The Three Cosmic Factors Grid -->
+            <div class="findings-grid">
+
+              <!-- Box 1: Reincarnation -->
+              <div class="finding-card finding-reincarnation" id="findingCardReincarnation">
+                <div class="finding-badge">
+                  <span class="icon" id="reincarnationBadgeIcon">🐾</span>
+                  <span class="badge-title" id="reincarnationBadgeTitle">FACTOR I : REINCARNATION</span>
+                </div>
+                <h3 class="finding-headline" id="reincarnationHeadline">Sentient Capybara</h3>
+                <div class="finding-body">
+                  <div class="finding-key-val">
+                    <span class="key">Allocated Form:</span>
+                    <span class="val" id="reincarnationSpecies">Hydrochoerus hydrochaeris</span>
+                  </div>
+                  <div class="finding-key-val">
+                    <span class="key" id="reincarnationCountryKey">Assigned Realm:</span>
+                    <span class="val" id="reincarnationCountry">Kingdom of Norway</span>
+                  </div>
+                  <p class="finding-explanation" id="reincarnationDesc">
+                    Awarded divine sanctuary status, unlimited thermal bath privileges, and zero mortal stress.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Box 2: Geographical Location -->
+              <div class="finding-card finding-geodestiny" id="findingCardGeodestiny">
+                <div class="finding-badge">
+                  <span class="icon" id="geoBadgeIcon">📍</span>
+                  <span class="badge-title" id="geoBadgeTitle">FACTOR II : GEOGRAPHICAL LOCATION</span>
+                </div>
+                <h3 class="finding-headline" id="geoDestinyHeadline">Bergen, Vestland, Norway</h3>
+                <div class="finding-body">
+                  <div class="finding-key-val">
+                    <span class="key">Chrono-Spatial Coordinates:</span>
+                    <span class="val coordinates" id="geoCoordinates">60.3913° N, 5.3221° E</span>
+                  </div>
+                  <div class="finding-key-val">
+                    <span class="key" id="geoResolvedLocationKey">Geographical Epicenter:</span>
+                    <span class="val location-resolved" id="geoResolvedLocation">Bergen, Vestland, Norway</span>
+                  </div>
+                  <p class="finding-explanation" id="geoDestinyDesc">
+                    Spiritual tether permanently bound to this geomagnetic planetary coordinate node.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Box 3: Wealth -->
+              <div class="finding-card finding-wealth" id="findingCardFinancial">
+                <div class="finding-badge">
+                  <span class="icon" id="wealthBadgeIcon">💰</span>
+                  <span class="badge-title" id="wealthBadgeTitle">FACTOR III : SPECIES WEALTH &amp; HOARD</span>
+                </div>
+                <h3 class="finding-headline" id="wealthHeadline">Thermal Lagoon Patriarch</h3>
+                <div class="finding-body">
+                  <div class="finding-key-val">
+                    <span class="key" id="wealthWorthKey">Projected Creature Hoard:</span>
+                    <span class="val wealth-highlight" id="wealthNetWorth">48,500 Soaked Melon Rinds</span>
+                  </div>
+                  <div class="finding-key-val">
+                    <span class="key" id="wealthHoldingsKey">Allocated Territory &amp; Spoils:</span>
+                    <span class="val" id="wealthHoldings">Private Hot Spring Lagoon, 3 Basking Boulders</span>
+                  </div>
+                  <p class="finding-explanation" id="wealthDecreeText">
+                    Decreed sovereign water rights and unlimited snacking privileges by cosmic fortune.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Certificate Verification & Wax Seal Footer -->
+            <footer class="cert-footer">
+              <div class="footer-col cert-seal-col">
+                <div class="wax-seal" id="waxSeal" aria-label="Official Wax Seal of Destiny">
+                  <div class="seal-inner">
+                    <span class="seal-star">★</span>
+                    <span class="seal-text-top">BUREAU OF FATE</span>
+                    <span class="seal-symbol">⚖️</span>
+                    <span class="seal-text-bottom">VERIFIED</span>
+                  </div>
+                </div>
+                <div class="seal-caption">OFFICIAL ASTRAL NOTARIZATION</div>
+              </div>
+
+              <div class="footer-col cert-signatures">
+                <div class="signature-block">
+                  <div class="sig-font">Pranav</div>
+                  <div class="sig-line"></div>
+                  <div class="sig-title">Lord High Registrar of Metempsychosis</div>
+                </div>
+                <div class="signature-block">
+                  <div class="sig-font">Sreehari</div>
+                  <div class="sig-line"></div>
+                  <div class="sig-title">Chief Geocoding Cartographer</div>
+                </div>
+              </div>
+
+              <div class="footer-col cert-barcode-col">
+                <div class="barcode" id="certBarcode" aria-hidden="true">
+                  <!-- Generated via CSS/SVG bars -->
+                </div>
+                <div class="barcode-num" id="certBarcodeNum">CF-2026-99381-VOID</div>
+                <div class="cert-date-issued">Executed under Astral Alignment • <span id="certIssueDate">2026</span>
+                </div>
+              </div>
+            </footer>
+
+            <!-- Mandatory Legal Disclaimer -->
+            <div class="cert-disclaimer"
+              style="text-align: center; padding-top: 1.1rem; margin-top: 1.1rem; border-top: 1px dashed rgba(212, 175, 55, 0.2); font-size: 0.72rem; letter-spacing: 0.05em; color: var(--text-dim); font-style: italic;">
+              Issued purely for recreational and reincarnational contemplation by the Supreme Astral Council.
+            </div>
+
+          </div>
+        </div>
+      </article>
+
+      <!-- Toast Feedback Message -->
+      <div id="toastMessage" class="toast-message" role="alert" aria-live="polite"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-page-footer">
+      <p>CertiFate™ • Interdimensional Joke Bureau of Destiny • No terrestrial refunds granted on reincarnation
+        outcomes.</p>
+      <p class="reverse-geo-credit">Reverse Geocoding powered by OpenStreetMap &amp; Astral Telemetry.</p>
+    </footer>
+  </main>
+
+  <!-- Load Modules -->
+  <script src="canvas-export.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
