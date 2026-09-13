@@ -100,8 +100,8 @@ For Hardware:Nothing much.
 [Add any extra demo materials/links]
 
 ## Team Contributions
-- [Sreehari P Ranjith]: [Research]
-- [Pranav Reji]: [Coding]
+[Sreehari P Ranjith]: [Research]
+[Pranav Reji]: [Coding]
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 
